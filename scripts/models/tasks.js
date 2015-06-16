@@ -1,5 +1,7 @@
 var Task = Backbone.Model.extend({
 
+	urlRoot: 'http://tiny-lasagna-server.herokuapp.com/collections/matts_tasks',
+
 	idAttribute: '_id',
 	defaults: function() {
 		return {
@@ -13,7 +15,8 @@ var Task = Backbone.Model.extend({
 var TaskCollection = Backbone.Collection.extend({
 
 	model: Task,
-	url: 'http://tiny-lasagna-server.herokuapp.com/collections/matts_tasks'
+	url: 'http://tiny-lasagna-server.herokuapp.com/collections/matts_tasks',
+	comparator: 'created_at'
 
 });
 

@@ -6,10 +6,15 @@ export default Backbone.View.extend({
 	tagName: 'ul',
 	id: 'todo-list',
 
+	completeAll: function() {
+		console.log(this);
+	},
+
 	initialize: function() {
 		this.collection.fetch().then(function(tasks) {
 			this.render();
 		}.bind(this));
+		this.listenTo(this.collection, 'update', this.render);
 	},
 
 	render: function() {
