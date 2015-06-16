@@ -25,5 +25,6 @@ export default Backbone.View.extend({
 
 	completed: function() {
 		this.$el.toggleClass('completed');
+		this.model.set('completed', true);
 	}
 });

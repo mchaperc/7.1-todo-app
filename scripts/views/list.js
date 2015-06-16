@@ -14,7 +14,7 @@ export default Backbone.View.extend({
 		this.collection.fetch().then(function(tasks) {
 			this.render();
 		}.bind(this));
-		this.listenTo(this.collection, 'update', this.render);
+		this.listenTo(this.collection, 'update reset', this.render);
 	},
 
 	render: function() {

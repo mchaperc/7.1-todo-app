@@ -6,6 +6,7 @@ var Task = Backbone.Model.extend({
 	defaults: function() {
 		return {
 			content: '',
+			completed: false,
 			created_at: new Date()
 		};
 	}
