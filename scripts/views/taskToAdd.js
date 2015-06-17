@@ -5,10 +5,6 @@ export default Backbone.View.extend({
 	tagName: 'form',
 	className: 'add-todo-form',
 
-	events: {
-		'submit': 'addTask',
-	},
-
 	initialize: function() {
 		this.render();
 	},
@@ -25,10 +21,6 @@ export default Backbone.View.extend({
 			content: content
 		});
 		$('#new-todo').val('');
-	},
-
-	toggleAll: function() {
-		console.log('toggledAll');
 	}
 
 });

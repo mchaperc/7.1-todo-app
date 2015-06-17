@@ -7,7 +7,9 @@ export default Backbone.View.extend({
 
 	events: {
 		'click .destroy': 'deleteTask',
-		'click .toggle': 'completed'
+		'click .toggle': 'completed',
+		'dblclick label': 'editItem',
+		'submit': 'saveEdit',
 	},
 
 	initialize: function() {
@@ -36,5 +38,19 @@ export default Backbone.View.extend({
 			this.model.set('completed', true);
 		}
 		this.model.save();
+	},
+
+	editItem: function() {
+		var content = this.model.get('content');
+		this.$('.read').hide();
+		this.$('.edit').show();
+	},
+
+	saveEdit: function(e) {
+		e.preventDefault();
+		var content = this.$('.edit').val();
+		this.model.set('content', content);
+		this.model.save();
 	}
+
 });
