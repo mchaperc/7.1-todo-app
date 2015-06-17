@@ -9,17 +9,17 @@ import router from './router';
    	var allComplete = false;
 
    	// I'm sorry!!!!!!!
-    $('#toggle-all').on('click', function() {
-    	if (!allComplete) {
-    		$('li').addClass('completed');
-    		$('input[type=checkbox]').prop('checked', true);
-    		allComplete = true;
-    	} else {
-    		$('li').removeClass('completed');
-    		$('input[type=checkbox]').prop('checked', false);
-    		allComplete = false;
-    	}
-    });
+    // $('#toggle-all').on('click', function() {
+    // 	if (!allComplete) {
+    // 		$('li').addClass('completed');
+    // 		$('input[type=checkbox]').prop('checked', true);
+    // 		allComplete = true;
+    // 	} else {
+    // 		$('li').removeClass('completed');
+    // 		$('input[type=checkbox]').prop('checked', false);
+    // 		allComplete = false;
+    // 	}
+    // });
 
   });
 

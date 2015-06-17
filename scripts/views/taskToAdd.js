@@ -7,6 +7,7 @@ export default Backbone.View.extend({
 
 	events: {
 		'submit': 'addTask',
+		'click input[type=checkbox]': 'toggleAll',
 	},
 
 	initialize: function() {
@@ -25,6 +26,10 @@ export default Backbone.View.extend({
 			content: content
 		});
 		$('#new-todo').val('');
+	},
+
+	toggleAll: function() {
+		console.log('toggledAll');
 	}
 
 });

@@ -6,6 +6,10 @@ export default Backbone.View.extend({
 	tagName: 'ul',
 	id: 'todo-list',
 
+	events: {
+		'click input[type=checkbox]': 'toggleAll',
+	},
+
 	completeAll: function() {
 		console.log(this);
 	},
@@ -14,10 +18,12 @@ export default Backbone.View.extend({
 		this.collection.fetch().then(function(tasks) {
 			this.render();
 		}.bind(this));
-		this.listenTo(this.collection, 'update reset', this.render);
+		this.listenTo(this.collection, 'update reset change', this.render);
+		// this.listenTo(this.collection, 'change', this.render);
 	},
 
 	render: function() {
+		this.$el.html(this.template(this.collection.toJSON()));
 		this.renderChildren();
 	},
 
@@ -37,5 +43,24 @@ export default Backbone.View.extend({
 	remove: function(){
 		_.invoke(this.children || [], 'remove');
 		Backbone.View.prototype.remove.apply(this, arguments);
+	},
+
+	toggleAll: function() {
+		console.log(this.collection.models);
+		if (this.collection.models.every(function(model) {
+			var isCompleted = model.get('completed');
+			return isCompleted === true;
+			})) {
+				return _.map(this.collection.models, function(model) {
+					model.set('completed', false);
+					model.save();
+				});
+		} else {
+			return _.map(this.collection.models, function(model) {
+				model.set('completed', true);
+				model.save();
+			});
+		}
 	}
+
 });
