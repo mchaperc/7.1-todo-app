@@ -7,7 +7,6 @@ export default Backbone.View.extend({
 
 	events: {
 		'submit': 'addTask',
-		'click input[type=checkbox]': 'toggleAll',
 	},
 
 	initialize: function() {
