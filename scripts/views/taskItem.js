@@ -11,6 +11,11 @@ export default Backbone.View.extend({
 	},
 
 	initialize: function() {
+		if(this.model.attributes.completed === true) {
+			this.$el.addClass('completed');
+		} else {
+			this.$el.removeClass('completed');
+		}
 		this.render();
 	},
 
@@ -20,11 +25,16 @@ export default Backbone.View.extend({
 
 	deleteTask: function() {
 		this.model.destroy();
-		console.log('destwooooy!');
 	},
 
 	completed: function() {
 		this.$el.toggleClass('completed');
-		this.model.set('completed', true);
+		var isComplete = this.model.get('completed');
+		if (isComplete) {
+			this.model.set('completed', false);
+		} else {
+			this.model.set('completed', true);
+		}
+		this.model.save();
 	}
 });
