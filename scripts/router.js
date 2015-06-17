@@ -1,6 +1,7 @@
 import TaskView from './views/taskToAdd';
 import ListView from './views/list';
 import TasksLeft from './views/left';
+import RemoveView from './views/removeCompleted';
 import {TaskCollection} from './models/tasks';
 
 var Router = Backbone.Router.extend({
@@ -21,10 +22,16 @@ var Router = Backbone.Router.extend({
 			this.filteredTasks = this.tasks.clone();
 			this.filteredTasks.listenTo(this.tasks, 'add', this.filteredTasks.add);
 			this.filteredTasks.listenTo(this.tasks, 'remove', this.filteredTasks.remove);
+			this.completedTasks = this.tasks.clone();
+			this.completedTasks.listenTo(this.tasks, 'add', this.filteredTasks.add);
+			this.completedTasks.listenTo(this.tasks, 'remove', this.filteredTasks.remove);
 			this.taskList = new ListView({collection: this.filteredTasks});
 			$('#main').prepend(this.taskList.el);
 			this.tasksLeft = new TasksLeft({collection: this.tasks});
 			$('#footer').prepend(this.tasksLeft.el);
+			this.completedTasks.reset({completed: true});
+			this.removeTasks = new RemoveView({collection: this.completedTasks});
+			$('#footer').append(this.removeTasks.el);
 		}.bind(this));
 	},
 
