@@ -8,6 +8,7 @@ export default Backbone.View.extend({
 
 	initialize: function() {
 		this.render();
+		console.log(this.collection.models);
 		this.listenTo(this.collection, 'update change reset', this.render);
 	},
 
@@ -16,7 +17,7 @@ export default Backbone.View.extend({
 	},
 
 	clearCompl: function() {
-		_.invoke(this.collection.models, 'destroy');
+		this.collection.invoke('destroy');
 	}
 
 });

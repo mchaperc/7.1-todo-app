@@ -20,7 +20,6 @@ export default Backbone.View.extend({
 	addTask: function(e) {
 		e.preventDefault();
 		var content = $('#new-todo').val();
-		console.log(content);
 		this.collection.create({
 			content: content
 		});
