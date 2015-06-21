@@ -62,14 +62,15 @@ var Router = Backbone.Router.extend({
 			this.filteredTasks = this.tasks.clone();
 			this.filteredTasks.listenTo(this.tasks, 'add', this.filteredTasks.add);
 			this.filteredTasks.listenTo(this.tasks, 'remove', this.filteredTasks.remove);
-			this.completedTasks = this.tasks.clone();
-			this.completedTasks.listenTo(this.tasks, 'add', this.filteredTasks.add);
-			this.completedTasks.listenTo(this.tasks, 'remove', this.filteredTasks.remove);
 			this.taskList = new _viewsList2['default']({ collection: this.filteredTasks });
 			$('#main').prepend(this.taskList.el);
 			this.tasksLeft = new _viewsLeft2['default']({ collection: this.tasks });
 			$('#footer').prepend(this.tasksLeft.el);
-			this.completedTasks.reset({ completed: true });
+			this.completedTasks = this.tasks.clone();
+			this.completedTasks.listenTo(this.tasks, 'change', (function () {
+				this.completedTasks.reset(this.tasks.where({ completed: true }));
+			}).bind(this));
+			this.completedTasks.reset(this.tasks.where({ completed: true }));
 			this.removeTasks = new _viewsRemoveCompleted2['default']({ collection: this.completedTasks });
 			$('#footer').append(this.removeTasks.el);
 		}).bind(this));
@@ -185,9 +186,7 @@ exports['default'] = Backbone.View.extend({
 		'click input[type=checkbox]': 'toggleAll'
 	},
 
-	completeAll: function completeAll() {
-		console.log(this);
-	},
+	completeAll: function completeAll() {},
 
 	initialize: function initialize() {
 		this.collection.fetch().then((function (tasks) {
@@ -258,6 +257,7 @@ exports['default'] = Backbone.View.extend({
 
 	initialize: function initialize() {
 		this.render();
+		console.log(this.collection.models);
 		this.listenTo(this.collection, 'update change reset', this.render);
 	},
 
@@ -266,7 +266,7 @@ exports['default'] = Backbone.View.extend({
 	},
 
 	clearCompl: function clearCompl() {
-		_.invoke(this.collection.models, 'destroy');
+		this.collection.invoke('destroy');
 	}
 
 });
@@ -368,7 +368,6 @@ exports['default'] = Backbone.View.extend({
 	addTask: function addTask(e) {
 		e.preventDefault();
 		var content = $('#new-todo').val();
-		console.log(content);
 		this.collection.create({
 			content: content
 		});

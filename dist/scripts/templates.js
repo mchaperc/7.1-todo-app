@@ -1,6 +1,6 @@
 this["JST"] = this["JST"] || {};
 this["JST"]["addTask"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<input type=\"text\" id=\"new-todo\" placeholder=\"What needs to be done?\" />\n<input type=\"checkbox\" id=\"toggle-all\">";
+    return "<input type=\"text\" id=\"new-todo\" placeholder=\"What needs to be done?\" />";
 },"useData":true});
 this["JST"]["remove-completed"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<button id=\"clear-completed\">\n     Clear completed ("
