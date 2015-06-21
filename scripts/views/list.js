@@ -11,7 +11,7 @@ export default Backbone.View.extend({
 	},
 
 	completeAll: function() {
-		console.log(this);
+		
 	},
 
 	initialize: function() {
